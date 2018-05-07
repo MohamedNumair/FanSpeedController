@@ -35,8 +35,7 @@ void main() {
 //PINS
 trisc.f4 = 1 ;
 trisc.f5 = 1 ;
-UP = 0 ;
-Down = 0 ;
+
 
 trisc.f6 = 0;
 trisc.f7 = 0 ;
@@ -83,7 +82,7 @@ while(1){
 
                 delay_ms(500);
 x = adc_read(0) ;
-y = (x*5.0/1023);
+y = (x*5.0/1024);
 temp = y*100    ;
 
 if( temp>setT  && temp < 50){
@@ -93,6 +92,8 @@ SPA = (temp-setT)*255/(50-setT);
   }
   else if ( temp > 50) {
   SPA = 255;
+      Green =0 ;
+      RED = 1 ;
   }
 else { SPA = 0 ;
 RED =0 ;
@@ -119,7 +120,7 @@ temp_txt[4]= '\0' ;
           lcd_cmd(_lcd_clear);
 lcd_out(1,1,"Temp = ");
 lcd_out_cp(temp_txt);
-lcd_chr_cp(223);
+lcd_chr_cp(223); // for Centigrade o
 lcd_chr_cp('C');
 
 lcd_out(2,1,"RPM = ");
